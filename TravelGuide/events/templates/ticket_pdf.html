@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Travel Token</title>
+</head>
+<body>
+<div>
+    <h1 class="text-center">Travel Guide</h1>
+
+</div>
+<div>
+    <hr>
+    <table>
+         <tr>
+            <td>Name</td>
+            <td>Members</td>
+            <td>Mobile</td>
+             <td>Total</td>
+             <td>Paid</td>
+             <td>Status</td>
+         </tr>
+
+
+      </table>
+    <hr>
+    <table>
+        <tr>
+            <td>{{name}}</td>
+            <td>{{members}}</td>
+            <td>{{enrollment.mobile}}</td>
+            <td>{{payment}} TK</td>
+             <td>{{enrollment.paid}}</td>
+             <td>{{enrollment.status}}</td>
+
+         </tr>
+    </table>
+    <hr>
+</div>
+<div>
+    <section>
+        <h2>Date</h2>
+        <li>{{event.date}}</li>
+    </section>
+    <section>
+        <h2>Locations</h2>
+        {% for location in event.location.all %}
+            <li>{{location}}</li>
+        {% endfor %}
+    </section>
+    <section>
+        <h2>Event Description</h2>
+        <p>{{event.description}}</p>
+    </section>
+    <section>
+        <h3>Inclusions</h3>
+							<ul>
+								<li>Meals for Breakfast, Lunch and Dinner</li>
+								<li>Snacks twice a day</li>
+								<li>Accommodation suitable for solo, duo or groups</li>
+								<li>Modes of personal and all-in recreation</li>
+								<li>Two always-on-service crew-mates</li>
+								<li>One expert guide and manager</li>
+							</ul>
+    </section>
+</div>
+
+
+</body>
+</html>

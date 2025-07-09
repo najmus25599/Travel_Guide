@@ -1,0 +1,259 @@
+
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+	<title>Travel Guide: Travel luxuriously</title>
+
+	<meta name="viewport" content="width=device-width">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/css/all.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/css/all.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/css/lightbox.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/css/flexslider.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/css/owl.carousel.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/css/owl.theme_default.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/css/jquery.rateyo.css' %}"/>
+	<!-- <link rel="stylesheet" type="text/css" href="css/jquery.mmenu.all.css" /> -->
+	<!-- <link rel="stylesheet" type="text/css" href="css/meanmenu.min.css"> -->
+	<link rel="stylesheet" type="text/css" href="{% static 'main/inner-page-style.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/style.css' %}">
+	<link href="https://fonts.googleapis.com/css?family=Raleway:400,500,600,700" rel="stylesheet">
+</head>
+<body>
+
+	<div id="page" class="site" itemscope itemtype="http://schema.org/LocalBusiness">
+		<header class="site-header">
+			<div class="top-header">
+				<div class="container">
+					<div class="top-header-left">
+						<div class="top-header-block">
+							<a href="mailto:info@travelguide.com" itemprop="email"><i class="fas fa-envelope"></i> info@travelguide.com</a>
+						</div>
+						<div class="top-header-block">
+							<a href="tel:+8801690061462" itemprop="telephone"><i class="fas fa-phone"></i> +8801690061462</a>
+						</div>
+					</div>
+					<div class="top-header-right">
+						<div class="social-block">
+							<ul class="social-list">
+								<li><a href=""><i class="fab fa-viber"></i></a></li>
+								<li><a href=""><i class="fab fa-google-plus-g"></i></a></li>
+								<li><a href=""><i class="fab fa-facebook-square"></i></a></li>
+								<li><a href=""><i class="fab fa-facebook-messenger"></i></a></li>
+								<li><a href=""><i class="fab fa-twitter"></i></a></li>
+								<li><a href=""><i class="fab fa-skype"></i></a></li>
+							</ul>
+						</div>
+						<div class="login-block">
+							{% if user.is_authenticated %}
+							<div class="dropdown1">
+							<a href = "/">{{ user.first_name }}<i class="fa fa-caret-down"></i>
+							</a>
+							<div class="dropdown-content">
+
+                                <a href="{% url 'main:user_profile' %}" style="color: black">Profile</a>
+								<a href="#" style="color: black">Booking</a>
+
+                             </div>
+							</div>
+							<a><form class="logout-link" action="{% url 'accounts:logout' %}" method="post">
+                                        {% csrf_token %}
+                            <button type="submit" class="btn btn-primary btn-sm">log out</button>
+                            </form>
+                            </a>
+							{% else %}
+							<a href="/accounts/login">Login
+							</a>
+							{% endif %}
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Top header Close -->
+			<div class="main-header">
+				<div class="container">
+					<div class="logo-wrap" itemprop="logo">
+						<img src="{% static 'main/images/site-logo.png' %}" alt="Logo Image">
+						<!-- <h1>Education</h1> -->
+					</div>
+					<div class="nav-wrap">
+						<nav class="nav-desktop">
+							<ul class="menu-list">
+								<li><a href="#">Home</a></li>
+								<li class="menu-parent">Events
+									<ul class="sub-menu">
+										<li><a href="/events/">Popular</a></li>
+										<!--<li><a href="#">Ongoing</a></li>
+										<li class="menu-parent">Others
+											<ul class="sub-menu">
+												<li><a href="">Local</a></li>
+												<li><a href="">International</a></li>
+											</ul>
+										</li>-->
+									</ul>
+								</li>
+								<li class="menu-parent">Services
+									<ul class="sub-menu">
+										<li><a href="{% url 'main:hotel_page' %}">Hotels & Resorts</a></li>
+										<li><a href="{% url 'main:reservation_new' %}">Take Hotel Reservation</a></li>
+										<li><a href="/bus/">Booking Bus</a></li>
+										<li>last child</li>
+									</ul>
+								</li>
+								<li class="menu-parent">Social Network
+									<ul class="sub-menu">
+										<li><a href="{% url 'main:usersearch' %}">Search people</a></li>
+										<li><a href="{% url 'main:direct_message' %}">Message Someone</a></li>
+										<li><a href="{% url 'main:chat_forum' %}">ShoutBox</a></li>
+									</ul>
+								</li>
+								<li><a href="{% url 'main:about' %}">About</a></li>
+								<li><a href="">Gallery</a></li>
+								<li><a href="{% url 'main:contact' %}">Contact</a></li>
+							</ul>
+						</nav>
+						<div id="bar">
+							<i class="fas fa-bars"></i>
+						</div>
+						<div id="close">
+							<i class="fas fa-times"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+		</header>
+		<!-- Header Close -->	
+		<div class="page-content">
+			<div class="container">
+				<aside>
+					<div class="news-letter">
+						<h2>Post Blog</h2>
+						<hr>
+						<form method="POST">
+							{% csrf_token %}
+							<input type="text" name="title" placeholder="An Interesting Title...">
+							<br>
+							<br>
+							<input type="text" name="body" placeholder="Write Body">
+							<br>
+							<br>
+							<label for="child">Select flair</label>
+												<select class="form-control" name="flair" id="child">
+													<option>mountain</option>
+													<option>sea</option>
+													<option>urban</option>
+													<option>rural</option>
+												</select>
+							<br>
+							<br>
+							<input type="file" class="form-control" name="img" id="customFile" />
+							<input type="submit" value="Post now">
+						</form>
+					</div>
+					<!-- Recent Post Close -->
+					<!-- Follow Us close -->
+				</aside>
+				<br>
+			</div>
+			<br>
+		</div>
+		<section class="query-section">
+			<div class="container">
+				<p>Any Queries? Ask us any questions at<a href="tel:+8801690061462"><i class="fas fa-phone"></i> +8801690061462</a></p>
+			</div>
+		</section>
+		<!-- End of Query Section -->
+		<footer class="page-footer">
+			<div class="footer-first-section">
+				<div class="container">
+					<div class="box-wrap">
+						<header>
+							<h1>about</h1>
+						</header>
+						<p> At Travel Guide, we cherish bloggers and their unique travel perspectives. Join our platform to share your stories, inspire fellow travelers, and connect with a vibrant community that celebrates the power of storytelling. Together, let's make a difference in the world of travel.</p>
+
+						<h4><a href="tel:+8801690061462"><i class="fas fa-phone"></i> +8801690061462</a></h4>
+						<h4><a href="mailto:info@travelguide.com"><i class="fas fa-envelope"></i> info@travelguide.com</a></h4>
+						<h4><i class="fas fa-map-marker-alt"></i>Bonosree, Dhaka, Bangladesh</h4>
+					</div>
+
+					<div class="box-wrap">
+						<header>
+							<h1>links</h1>
+						</header>
+						<ul>
+							<li><a href="#">Teacher</a></li>
+							<li><a href="#">Courses</a></li>
+							<li><a href="#">Courses</a></li>
+							<li><a href="#">Courses</a></li>
+							<li><a href="#">Courses</a></li>
+							<li><a href="#">Courses</a></li>
+						</ul>
+					</div>
+
+					<div class="box-wrap">
+						<header>
+							<h1>recent courses</h1>
+						</header>
+						<div class="recent-course-wrap">
+							<img src="images/ui-ux.jpg" alt="Ui/Ux Designing">
+							<a href=""><div class="course-name">
+								<h3>UI/UX Designer courses</h3>
+								<p><span>$50</span> $40</p>
+							</div></a>
+						</div>
+						<div class="recent-course-wrap">
+							<img src="images/ui-ux.jpg" alt="Ui/Ux Designing">
+							<a href=""><div class="course-name">
+								<h3>UI/UX Designer courses</h3>
+								<p><span>$50</span> $40</p>
+							</div></a>
+						</div>
+					</div>
+
+					<div class="box-wrap">
+						<header>
+							<h1>quick contact</h1>
+						</header>
+						<section class="quick-contact">
+							<input type="email" name="email" placeholder="Your Email*">
+							<textarea placeholder="Type your message*"></textarea>
+							<button>send message</button>
+						</section>
+					</div>
+
+				</div>
+			</div>
+			<!-- End of box-Wrap -->
+			<div class="footer-second-section">
+				<div class="container">
+					<hr class="footer-line">
+					<ul class="social-list">
+						<li><a href=""><i class="fab fa-facebook-square"></i></a></li>
+						<li><a href=""><i class="fab fa-twitter"></i></a></li>
+						<li><a href=""><i class="fab fa-skype"></i></a></li>
+						<li><a href=""><i class="fab fa-youtube"></i></a></li>
+						<li><a href=""><i class="fab fa-instagram"></i></a></li>
+					</ul>
+					<hr class="footer-line">
+				</div>
+			</div>
+			<div class="footer-last-section">
+				<div class="container">
+					<p>Copyright 2023 &copy; travelguide.com <span> | </span> We believe in luxury with efficiency</p>
+				</div>
+			</div>
+		</footer>
+	</div>
+	<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="js/lightbox.js"></script>
+	<script type="text/javascript" src="js/all.js"></script>
+	<script type="text/javascript" src="js/owl.carousel.js"></script>
+	<script type="text/javascript" src="js/jquery.flexslider.js"></script>
+	<script type="text/javascript" src="js/jquery.rateyo.js"></script>
+	<script type="text/javascript" src="js/jquery.mmenu.all.js"></script>
+	<script type="text/javascript" src="js/custom.js"></script>
+</body>
+</html>

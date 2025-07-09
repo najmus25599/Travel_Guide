@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+	<title>{{event.name}}</title>
+	<meta name="viewport" content="width=device-width">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/css/all.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/css/all.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/css/lightbox.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/css/flexslider.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/css/owl.carousel.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/css/owl.theme_default.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/css/jquery.rateyo.css' %}"/>
+	<!-- <link rel="stylesheet" type="text/css" href="css/jquery.mmenu.all.css" /> -->
+	<!-- <link rel="stylesheet" type="text/css" href="css/meanmenu.min.css"> -->
+	<link rel="stylesheet" type="text/css" href="{% static 'main/inner-page-style.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/style.css' %}">
+	<link href="https://fonts.googleapis.com/css?family=Raleway:400,500,600,700" rel="stylesheet">
+</head>
+<body>
+
+	<div id="page" class="site" itemscope itemtype="http://schema.org/LocalBusiness">
+		<header class="site-header">
+			<div class="top-header">
+				<div class="container">
+					<div class="top-header-left">
+						<div class="top-header-block">
+							<a href="mailto:info@bonvoyage.com" itemprop="email"><i class="fas fa-envelope"></i> info@bonvoyage.com</a>
+						</div>
+						<div class="top-header-block">
+							<a href="tel:+8801686614624" itemprop="telephone"><i class="fas fa-phone"></i> +88 01686614624</a>
+						</div>
+					</div>
+					<div class="top-header-right">
+						<div class="social-block">
+							<ul class="social-list">
+								<li><a href=""><i class="fab fa-viber"></i></a></li>
+								<li><a href=""><i class="fab fa-google-plus-g"></i></a></li>
+								<li><a href=""><i class="fab fa-facebook-square"></i></a></li>
+								<li><a href=""><i class="fab fa-facebook-messenger"></i></a></li>
+								<li><a href=""><i class="fab fa-twitter"></i></a></li>
+								<li><a href=""><i class="fab fa-skype"></i></a></li>
+							</ul>
+						</div>
+						<div class="login-block">
+							{% if user.is_authenticated %}
+							<div class="dropdown1">
+							<a href = "/">{{ user.first_name }}<i class="fa fa-caret-down"></i>
+							</a>
+							<div class="dropdown-content">
+
+                                <a href="{% url 'main:user_profile' %}" style="color: black">Profile</a>
+								<a href="#" style="color: black">Booking</a>
+
+                             </div>
+							</div>
+							<a><form class="logout-link" action="{% url 'accounts:logout' %}" method="post">
+                                        {% csrf_token %}
+                            <button type="submit" class="btn btn-primary btn-sm">log out</button>
+                            </form>
+                            </a>
+							{% else %}
+							<a href="/accounts/login">Login
+							</a>
+							{% endif %}
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Top header Close -->
+			<div class="main-header">
+				<div class="container">
+					<div class="logo-wrap" itemprop="logo">
+						<img src="{% static 'main/images/site-logo.png' %}" alt="Logo Image">
+						<!-- <h1>Education</h1> -->
+					</div>
+					<div class="nav-wrap">
+						<nav class="nav-desktop">
+							<ul class="menu-list">
+								<li><a href="#">Home</a></li>
+								<li class="menu-parent">Events
+									<ul class="sub-menu">
+										<li><a href="/events/">Popular</a></li>
+										<!--<li><a href="#">Ongoing</a></li>
+										<li class="menu-parent">Others
+											<ul class="sub-menu">
+												<li><a href="">Local</a></li>
+												<li><a href="">International</a></li>
+											</ul>
+										</li>-->
+									</ul>
+								</li>
+								<li class="menu-parent">Services
+									<ul class="sub-menu">
+										<li><a href="{% url 'main:hotel_page' %}">Hotels & Resorts</a></li>
+										<li><a href="{% url 'main:reservation_new' %}">Take Hotel Reservation</a></li>
+										<li><a href="/bus/">Booking Bus</a></li>
+										<li>last child</li>
+									</ul>
+								</li>
+								<li class="menu-parent">Social Network
+									<ul class="sub-menu">
+										<li><a href="{% url 'main:usersearch' %}">Search people</a></li>
+										<li><a href="{% url 'main:direct_message' %}">Message Someone</a></li>
+										<li><a href="{% url 'main:chat_forum' %}">ShoutBox</a></li>
+									</ul>
+								</li>
+								<li><a href="{% url 'main:about' %}">About</a></li>
+								<li><a href="/blogs">Blogs</a></li>
+								<li><a href="{% url 'main:contact' %}">Contact</a></li>
+							</ul>
+						</nav>
+						<div id="bar">
+							<i class="fas fa-bars"></i>
+						</div>
+						<div id="close">
+							<i class="fas fa-times"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+		</header>
+		<!-- Header Close -->
+		<section class="page-content" id="course-page">
+			<div class="container">
+				<main class="course-detail">
+					<h2>{{bus.name}}</h2>
+					<header>
+						<div class="course-box">
+							<i class="far fa-clock"></i>
+							<p>{{bus.date}}</p>
+						</div>
+
+						<div class="course-box">
+							<i class="fas fa-chalkboard-teacher"></i>
+							<p>{{bus.time}}</p>
+						</div>
+
+						<div class="course-box">
+							<i class="fas fa-money-check-alt"></i>
+							<p>BDT {{bus.price}}</p>
+						</div>
+						<div class="course-box">
+							<i class="fas fa-star"></i>
+							<p>{{bus.available}}</p>
+						</div>
+					</header>
+					<article>
+					</article>					
+				</main>
+				<aside>
+					<section class="page-content" id="course-page-copy">
+					<div class="course-box-copy">
+						<main class="course-detail-copy">
+							<header>
+								<div class="course-box-copy">
+									<h3>Enroll</h3>
+									<form method="POST">
+										{% csrf_token %}
+										{% if enrolled %}
+											<button type="button" disabled>Enrolled</button>
+										{% else %}
+											<hr>
+											<div class="form-group">
+												<label for="members">Select passengers</label>
+												<select class="form-control" name="passenger" id="members">
+													<option>1</option>
+													<option>2</option>
+													<option>3</option>
+													<option>4</option>
+													<option>5</option>
+												</select>
+												<br>
+												<label for="mobile">Mobile</label>
+												<input type="text" class="form-control" name="mobile" id="mobile" aria-describedby="PhoneNo" placeholder="Enter mobile">
+												<br>
+												<small id="PhoneNo" class="form-text text-muted">We'll never share your contact no with anyone else.</small>
+											</div>
+										<hr>
+											<button type="submit" value="Submit">Proceed</button>
+										{% endif %}
+									</form>
+									{% if user.is_authenticated %}
+										{% if booked %}
+										<hr/>
+										<h3>Bus Ticket</h3>
+									<a href="/bus/{{bus.slug}}/token"><button type="button">Download PDF</button></a>
+										{% endif %}
+									{% endif %}
+								</div>
+							</header>
+						</main>
+					</div>
+					</section>
+					<!-- New Letter Ends -->
+					<div class="recent-post">
+						<h2>manager</h2>
+						<div class="post">
+							<div class="post-wrap">
+								<div class="img-wrap">
+									<img src="{% static 'events/images/recent-post-img.jpg' %}" alt="Post Images">
+								</div>
+								<div class="post-content">
+									<span>
+										<a href="#"><i class="fab fa-facebook-f"></i></a>
+										<a href="#"><i class="fab fa-instagram"></i></a>
+										<a href="#"><i class="fab fa-twitter"></i></a>
+										<a href="#"><i class="fab fa-linkedin-in"></i></a>
+									</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- Recent Post Close -->
+				</aside>
+			</div>
+		</section>
+		<section class="recent-course-single">
+			<div class="container">
+				<h2>recent courses</h2>
+				<div class="grid">
+					{% for Event in events_list %}
+					{% if Event.slug != slug %}
+					<div class="grid-item" data-category="{{Event.category}}">
+						<div class="img-wrap">
+							<img src="/media/{{Event.event_img}}" alt="courses picture">
+						</div>
+						<a href="/events/{{Event.slug}}" class="learn-desining-banner-course">{{Event.name}}</a>
+						<div class="box-body">
+							<p>{{Event.description}}</p>
+							<section>
+								<p><span>Date:</span>{{Event.date}}</p>
+								<p><span>Duration:</span> {{Event.duration_day}} Days, {{Event.duration_night}} Nights</p>
+								<p><span>Transport:</span> {% for transport in Event.transport.all %}{{transport}}, {% endfor %}</p>
+								<p><span>Fee:</span> {{Event.price}}</p>
+							</section>
+						</div>
+					</div>
+					{% endif %}
+					{% endfor %}
+				</div>
+			</div>
+		</section>
+
+		<section class="query-section">
+			<div class="container">
+				<p>Any Queries? Ask us a question at<a href="tel:+8801686614624"><i class="fas fa-phone"></i> +88 01686614624</a></p>
+			</div>
+		</section>
+		<!-- End of Query Section -->
+		<footer class="page-footer" itemprop="footer" itemscope itemtype="http://schema.org/WPFooter">
+			<div class="footer-first-section">
+				<div class="container">
+					<div class="box-wrap" itemprop="about">
+						<header>
+							<h1>about</h1>
+						</header>
+						<p>Bon Voyage is an expert travel guide agency who organizes and manages your travels in a way never happened before. Travelling with us will find you new experience, friends and peace that lasts forever.</p>
+
+						<h4><a href="tel:+8801686614624"><i class="fas fa-phone"></i> +88 01686614624</a></h4>
+						<h4><a href="mailto:info@educationpro.com"><i class="fas fa-envelope"></i> info@bonvoyage.com</a></h4>
+						<h4><a href=""><i class="fas fa-map-marker-alt"></i>Aftabnagar, Dhaka, Bangladesh</a></h4>
+					</div>
+
+					<div class="box-wrap">
+						<header>
+							<h1>links</h1>
+						</header>
+						<ul>
+							<li><a href="#">Guides</a></li>
+							<li><a href="#">Bloggers</a></li>
+							<li><a href="#">Places</a></li>
+							<li><a href="#">Services</a></li>
+						</ul>
+					</div>
+
+					<div class="box-wrap">
+						<header>
+							<h1>recent events</h1>
+						</header>
+						<div class="recent-course-wrap">
+							<img src="{% static 'main/images/ui-ux.jpg' %}" alt="sundarbans-mangrove">
+							<a href=""><div class="course-name">
+								<h3>Explore Sundarbans</h3>
+								<p><span>12000 BDT</span> 9999 BDT</p>
+							</div></a>
+						</div>
+						<div class="recent-course-wrap">
+							<img src="{% static 'main/images/ui-ux.jpg' %}" alt="Cox's-Bazar">
+							<a href=""><div class="course-name">
+								<h3>Weekend in Cox's Bazar</h3>
+								<p><span>9000 BDT</span> 7000 BDT</p>
+							</div></a>
+						</div>
+					</div>
+
+					<div class="box-wrap">
+						<header>
+							<h1>quick contact</h1>
+						</header>
+						<section class="quick-contact">
+							<input type="email" name="email" placeholder="Your Email*">
+							<textarea placeholder="Type your message*"></textarea>
+							<button>send message</button>
+						</section>
+					</div>
+
+				</div>
+			</div>
+			<!-- End of box-Wrap -->
+			<div class="footer-second-section">
+				<div class="container">
+					<hr class="footer-line">
+					<ul class="social-list">
+						<li><a href=""><i class="fab fa-facebook-square"></i></a></li>
+						<li><a href=""><i class="fab fa-twitter"></i></a></li>
+						<li><a href=""><i class="fab fa-skype"></i></a></li>
+						<li><a href=""><i class="fab fa-youtube"></i></a></li>
+						<li><a href=""><i class="fab fa-instagram"></i></a></li>
+					</ul>
+					<hr class="footer-line">
+				</div>
+			</div>
+			<div class="footer-last-section">
+				<div class="container">
+					<p>Copyright 2022 &copy; bonvoyage.com <span> | </span> We believe in freedom</p>
+				</div>
+			</div>
+		</footer>
+	</div>
+	<script type="text/javascript" src="{% static 'events/js/jquery-3.3.1.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'events/js/lightbox.js' %}"></script>
+	<script type="text/javascript" src="{% static 'events/js/all.js' %}"></script>
+	<script type="text/javascript" src="{% static 'events/js/isotope.pkgd.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'events/js/owl.carousel.js' %}"></script>
+	<script type="text/javascript" src="{% static 'events/js/jquery.flexslider.js' %}"></script>
+	<script type="text/javascript" src="{% static 'events/js/jquery.rateyo.js' %}"></script>
+	<script type="text/javascript" src="{% static 'events/js/jquery.mmenu.all.js' %}"></script>
+	<script type="text/javascript" src="{% static 'events/js/custom.js' %}"></script>
+</body>
+</html>

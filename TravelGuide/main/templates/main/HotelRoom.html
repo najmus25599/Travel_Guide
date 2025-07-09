@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+	<title>Room details</title>
+	<meta name="viewport" content="width=device-width">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="{% static 'events/css/all.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'events/css/all.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'events/css/lightbox.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'events/css/flexslider.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'events/css/owl.carousel.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'events/css/owl.theme.default.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'events/css/jquery.rateyo.css' %}"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'events/css/jquery.mmenu.all.css' %}" />
+	<link rel="stylesheet" type="text/css" href="{% static 'events/inner-page-style.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'events/style.css' %}">
+
+	<style>
+
+.rcorners2 {
+  border-radius: 25px;
+  border: 2px solid #73AD21;
+  padding: 20px;
+
+  height: 150px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.img-container {
+  float: left;
+  width: 33.33%;
+  padding: 5px;
+}
+
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+</style>
+
+</head>
+<body>
+	<div id="page" class="site">
+		<header class="site-header">
+			<div class="top-header">
+				<div class="container">
+					<div class="top-header-left">
+						<div class="top-header-block">
+							<a href="mailto:info@travelguide.com" itemprop="email"><i class="fas fa-envelope"></i> info@travelguide.com</a>
+						</div>
+						<div class="top-header-block">
+							<a href="tel:+8801690061462" itemprop="telephone"><i class="fas fa-phone"></i> +8801690061462</a>
+						</div>
+					</div>
+					<div class="top-header-right">
+						<div class="social-block">
+							<ul class="social-list">
+								<li><a href=""><i class="fab fa-viber"></i></a></li>
+								<li><a href=""><i class="fab fa-google-plus-g"></i></a></li>
+								<li><a href=""><i class="fab fa-facebook-square"></i></a></li>
+								<li><a href=""><i class="fab fa-facebook-messenger"></i></a></li>
+								<li><a href=""><i class="fab fa-twitter"></i></a></li>
+								<li><a href=""><i class="fab fa-skype"></i></a></li>
+							</ul>
+						</div>
+						<div class="login-block">
+							{% if user.is_authenticated %}
+							<a href="/">
+								{{ user.first_name }}
+							</a>
+							<a><form class="logout-link" action="{% url 'accounts:logout' %}" method="post">
+                                        {% csrf_token %}
+                            <button type="submit" class="btn btn-primary btn-sm">log out</button>
+                            </form>
+                            </a>
+							{% else %}
+							<a href="/accounts/login">Login
+							</a>
+							{% endif %}
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Top header Close -->
+			<div class="main-header">
+				<div class="container">
+					<div class="logo-wrap">
+						<img src="{% static 'events/images/site-logo.png' %}" alt="Logo Image">
+					</div>
+					<div class="nav-wrap">
+						<nav class="nav-desktop">
+							<ul class="menu-list">
+								<li><a href="/">Home</a></li>
+								<li class="menu-parent">Events
+									<ul class="sub-menu">
+										<li><a href="/events/">Popular</a></li>
+									</ul>
+								</li>
+								<li class="menu-parent">Services
+									<ul class="sub-menu">
+										<li><a href="{% url 'main:hotel_page' %}">Hotels & Resorts</a></li>
+										<li><a href="{% url 'main:reservation_new' %}">Take Hotel Reservation</a></li>
+									</ul>
+								</li>
+								<li class="menu-parent">Social Network
+									<ul class="sub-menu">
+										<li><a href="{% url 'main:usersearch' %}">Search people</a></li>
+										<li><a href="{% url 'main:direct_message' %}">Message Someone</a></li>
+										<li><a href="{% url 'main:chat_forum' %}">ShoutBox</a></li>
+									</ul>
+								</li>
+								<li><a href="{% url 'main:about' %}">About</a></li>
+								<li><a href="">Gallery</a></li>
+								<li><a href="{% url 'main:contact' %}">Contact</a></li>
+
+							</ul>
+						</nav>
+						<div id="bar">
+							<i class="fas fa-bars"></i>
+						</div>
+						<div id="close">
+							<i class="fas fa-times"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+		</header>
+		<!-- Header Close -->
+		<!--<div class="banner">
+			<div class="owl-four owl-carousel">
+				<img src="{% static 'events/images/page-banner.png' %}" alt="Image of Bannner">
+				<img src="{% static 'events/images/page-banner2.png' %}" alt="Image of Bannner">
+				<img src="{% static 'events/images/page-banner3.png' %}" alt="Image of Bannner">
+			</div>
+			<div class="container">
+				<h1>welcome to education pro</h1>
+				<h3>With our advance search feature you can now find the trips for you...</h3>
+			</div>
+			 <div id="owl-four-nav" class="owl-nav"></div>
+		</div>-->
+		<!-- <div class="banner">
+			<div class="owl-five owl-carousel owl-theme">
+	            <div class="item-video">
+            		<iframe width="100%" height="450" src="https://www.youtube.com/embed/ENVW3uZ3a-4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+            		</iframe>
+	            </div>
+	            <div class="item-video">
+	            	<iframe width="100%" height="450" src="https://www.youtube.com/embed/0bfk90rWV9U" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+	            </div>
+	            <div class="item-video">
+	            	<iframe width="100%" height="450" src="https://www.youtube.com/embed/ktvTqknDobU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+	            </div>
+	            <div class="item-video">
+            		<iframe width="100%" height="450" src="https://www.youtube.com/embed/ENVW3uZ3a-4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+            		</iframe>
+	            </div>
+	            <div class="item-video">
+	            	<iframe width="100%" height="450" src="https://www.youtube.com/embed/0bfk90rWV9U" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+	            </div>
+	            <div class="item-video">
+	            	<iframe width="100%" height="450" src="https://www.youtube.com/embed/ktvTqknDobU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+	            </div>
+          </div>
+		</div> -->
+		<!-- Banner Close -->
+
+
+        <section class="signup">
+            <!-- <img src="images/signup-bg.jpg" alt=""> -->
+            <div class="container">
+
+
+                <div class="signup-content">
+					{% for roomModel in roomModel %}
+					{% ifequal roomModel.slug hotel_name %}
+						<div class="flex justify-between">
+					   		<div class="mb-5">
+						  		 <h1 class="text-3xl font-medium mb-px">
+							  		 <a href="../hotel_page"><img src="/static/home/img/back.png" height="30px" width="30px"></a>
+							  		 {{ mylist }}</h1>
+							</div>
+				 </div>
+
+
+				<div class="-mt-5 container max-w-full h-75vh flex mb-20" xmlns:rooms="http://www.w3.org/1999/xhtml"
+					 xmlns:rooms="http://www.w3.org/1999/xhtml">
+					<div class="h-full w-1/2 bg-center bg-cover" style="background-image:url({{room.first_photo}})"></div>
+					<div class="h-full w-1/2 flex flex-wrap">
+						<div class="clearfix">
+				  <div class="img-container">
+				  <img src="{{ roomModel.room_Img1.url }}" alt="Error" style="width:100%" height="300px" width="446">
+				  </div>
+				  <div class="img-container">
+				  <img src="{{ roomModel.room_Img2.url }}" alt="Error" style="width:100%" height="300px" width="446">
+				  </div>
+				  <div class="img-container">
+				  <img src="{{ roomModel.room_Img3.url }}" alt="Error" style="width:100%" height="300px" width="446">
+				  </div>
+				</div>
+
+					</div>
+				</div>
+
+					<div class="w-1/2">
+						<div class="flex border-section">
+							<h1>Room Type:</h1>
+							<span class="mr-5 font-light">  {{ roomModel.roomtype }}e</span>
+							<br>
+							<h1>Beds:</h1>
+							<span class="mr-5 font-light">  {{ roomModel.beds }}</span>
+							<br>
+							<h1>Baths:</h1>
+							<span class="mr-5 font-light">  {{ roomModel.baths }}</span>
+							<br>
+							<h1>Guests:</h1>
+							<span class="mr-5 font-light">  {{ roomModel.guests }}</span>
+						</div>
+						<div class="border-section">
+							<h1 class="font-medium text-lg mb-5">Amenities</h1>
+							<p>{{ roomModel.amenities }}</p>
+						</div>
+						<div class="border-section">
+							<h1 class="font-medium text-lg mb-5">Facility</h1>
+                            <p>{{ roomModel.facilities }}</p>
+						</div>
+					</div>
+        {% endifequal %}
+{% endfor %}
+
+ <h1 align="center">Reviews </h1>
+  </div>
+                        {% for hotelReview in hotelReview %}
+                        {% ifequal hotelReview.hotelName hotel_name %}
+						<table align="center" border="0" cellspacing="0" cellpadding="10" class="rcorners2" >
+							<tr >
+								<td width="200">
+									{% for profile in profile %}
+									{% ifequal profile.user hotelReview.user %}
+									{% if profile.user_image %}
+                                    <img src="{{ profile.user_image.url }}" alt="Error" height="100px" width="100px">
+                                    {% endif %}
+                                    {% if not profile.user_image %}
+                                    <img src="/static/user.png" alt="Error" height="100px" width="100px">
+                                    {% endif %}
+									{% endifequal %}
+									{% endfor %}
+								</td>
+									<td width="500" >
+									<h1> {{ hotelReview.name }} </h1>
+										<h4> Rating Given: {{hotelReview.rating }}/10</h4>
+                                	<h4> {{ hotelReview.review }}</h4>
+							</td>
+								<td VALIGN=TOP width="60" style="text-align:center">
+									{% ifequal user hotelReview.user %}
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="{% url 'main:deleteHotelReview' hotelReview.id %}">
+                                  <img src="/static/delete-circle-icon.png" height="30px" width="30px">
+										{% endifequal %}
+								</a>
+								</td>
+								<br>
+							</tr>
+						</table>
+                        {% endifequal %}
+
+                        {% endfor %}
+
+                    </div>
+
+					<h3 align="center"><a href="../hotelReview"><img src="/static/writeareview.png"></a></h3>
+
+                </div>
+            </div>
+        </section>
+
+
+
+		<section class="query-section">
+			<div class="container">
+				<p>Any Queries? Ask us any questions at<a href="tel:+8801690061462"><i class="fas fa-phone"></i> +8801690061462</a></p>
+			</div>
+		</section>
+		<!-- End of Query Section -->
+		<footer class="page-footer" itemprop="footer" itemscope itemtype="http://schema.org/WPFooter">
+			<div class="footer-first-section">
+				<div class="container">
+					<div class="box-wrap" itemprop="about">
+						<header>
+							<h1>about</h1>
+						</header>
+						<p>Travel Guide is an expert travel helper agency who organizes and manages your travels in a way never happened before. Travelling with us will find you new experience, friends and peace that lasts forever.</p>
+
+						<h4><a href="tel:+8801690061462"><i class="fas fa-phone"></i> +8801690061462</a></h4>
+						<h4><a href="mailto:info@travelguide.com"><i class="fas fa-envelope"></i> info@travelguide.com</a></h4>
+						<h4><a href=""><i class="fas fa-map-marker-alt"></i>Bonosree, Dhaka, Bangladesh</a></h4>
+					</div>
+
+					<div class="box-wrap">
+						<header>
+							<h1>links</h1>
+						</header>
+						<ul>
+							<li><a href="#">Guides</a></li>
+							<li><a href="#">Bloggers</a></li>
+							<li><a href="#">Places</a></li>
+							<li><a href="#">Services</a></li>
+						</ul>
+					</div>
+
+					<div class="box-wrap">
+						<header>
+							<h1>recent events</h1>
+						</header>
+						<div class="recent-course-wrap">
+							<img src="{% static 'main/images/ui-ux.jpg' %}" alt="sundarbans-mangrove">
+							<a href=""><div class="course-name">
+								<h3>Explore Sundarbans</h3>
+								<p><span>12000 BDT</span> 9999 BDT</p>
+							</div></a>
+						</div>
+						<div class="recent-course-wrap">
+							<img src="{% static 'main/images/ui-ux.jpg' %}" alt="Cox's-Bazar">
+							<a href=""><div class="course-name">
+								<h3>Weekend in Cox's Bazar</h3>
+								<p><span>9000 BDT</span> 7000 BDT</p>
+							</div></a>
+						</div>
+					</div>
+
+					<div class="box-wrap">
+						<header>
+							<h1>quick contact</h1>
+						</header>
+						<section class="quick-contact">
+							<input type="email" name="email" placeholder="Your Email*">
+							<textarea placeholder="Type your message*"></textarea>
+							<button>send message</button>
+						</section>
+					</div>
+
+				</div>
+			</div>
+			<!-- End of box-Wrap -->
+			<div class="footer-second-section">
+				<div class="container">
+					<hr class="footer-line">
+					<ul class="social-list">
+						<li><a href=""><i class="fab fa-facebook-square"></i></a></li>
+						<li><a href=""><i class="fab fa-twitter"></i></a></li>
+						<li><a href=""><i class="fab fa-skype"></i></a></li>
+						<li><a href=""><i class="fab fa-youtube"></i></a></li>
+						<li><a href=""><i class="fab fa-instagram"></i></a></li>
+					</ul>
+					<hr class="footer-line">
+				</div>
+			</div>
+			<div class="footer-last-section">
+				<div class="container">
+					<p>Copyright 2023 &copy; travelguide.com <span> | </span> We believe in luxury with efficiency</p>
+				</div>
+			</div>
+		</footer>
+	</div>
+	<script type="text/javascript" src="{% static 'events/js/jquery-3.3.1.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'events/js/lightbox.js' %}"></script>
+	<script type="text/javascript" src="{% static 'events/js/all.js' %}"></script>
+	<script type="text/javascript" src="{% static 'events/js/isotope.pkgd.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'events/js/owl.carousel.js' %}"></script>
+	<script type="text/javascript" src="{% static 'events/js/jquery.flexslider.js' %}"></script>
+	<script type="text/javascript" src="{% static 'events/js/jquery.rateyo.js' %}"></script>
+	<script type="text/javascript" src="{% static 'events/js/jquery.mmenu.all.js' %}"></script>
+	<script type="text/javascript" src="{% static 'events/js/custom.js' %}"></script>
+</body>
+</html>
